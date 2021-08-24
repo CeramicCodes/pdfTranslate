@@ -12,7 +12,6 @@ from os import remove
 from docx2pdf import convert
 from argparse import ArgumentParser
 from random import random
-import threading
 init()
 class translate:
     def __init__(self,document,lenguaje,to_traduce):
@@ -42,23 +41,15 @@ class translate:
             except AssertionError:
                 print(f"{Fore.RED} No se ha podido traducir el texto {text}")
 class read(translate):
-    def __init__(self,document,documentOut,lenguaje,to_traduce,UseMP):
+    def __init__(self,document,documentOut,lenguaje,to_traduce):
         super().__init__(document,lenguaje,to_traduce)
         self._documentNameOut = documentOut
         self.document = document
-        self.UseMP = UseMP
-        self.flgMP = self.validate()
         self.convert2docx()
-    def validate(self):
-        if self.UseMP == None:
-            self.UseMP = 1
-            return False
-        else:
-            return True
     @property
     def documentNameOut(self):
         return self._documentNameOut
-    def compute(self)->"docx":
+    def __enter__(self)->"docx":
         self.pdf = open(self.document,"rb")
         self.open = pdf.PdfFileReader(self.pdf)
         print(Fore.CYAN + "informacion del documento".center(50,"="))
@@ -77,21 +68,13 @@ class read(translate):
             print(f"{Fore.RED} Ha ocurrido un error: {e}")
         self.docxLoad.save(self.docx)
         return self
-    def __enter__(self):
-        '''
-        if self.UseTreads:
-            thread = threading.Thread(target=self.compute)
-            thread.start()
-        else:
-            self.compute()'''
-        self.compute()
 
     def convert2docx(self):
         print(Fore.CYAN)
         print("convirtiendo".center(50,'-'))
         self.docx = self.delExtension(self.document) + 'out.docx'
-        self.c = Converter(self.document)
-        self.c.convert(self.docx,multi_processing=self.flgMP,cpu_count=self.UseMP)
+        self.c = Converter(self.document,self.docx)
+        self.c.convert(self.docx)
         print(Fore.CYAN)
         print("fin".center(50,'-'))
         print('\n\n\n\n\n')
@@ -105,9 +88,8 @@ class read(translate):
                 #sleep
                 pbar.update(1)
                 yield x.text,number
-            #self.subTH = threading.Thread(target=self.subTH,args=(pbar))
     def nextText(self)->str:
-        #!unused TH
+        #!unused
         # pdf -> text
         try:
             with tqdm(total=self.open.getNumPages(),colour="green") as pbar:
@@ -146,7 +128,7 @@ class read(translate):
 
 def edDocx(par):
     #
-    with read(par.path,par.output,par.languaje,par.traduce,par.UseMultiProcess) as tr:
+    with read(par.path,par.output,par.languaje,par.traduce) as tr:
         if par.NotConvert2pdf:
             pass
         if par.Convert2pdf:
@@ -161,7 +143,6 @@ def main():
     ar.add_argument('-c','--Convert2pdf',help="convertir el archivo a pdf despues de traducirlo como .docx",action='store_true')
     ar.add_argument('-l','--languaje',help="el lenguje en el que esta el documento")
     ar.add_argument('-t','--traduce',help='lenguaje a traducir')
-    ar.add_argument('-um','--UseMultiProcess',help="usar multiprocesos para una traduccion mas rapida colocar los cpu a usar",type=int)
     par = ar.parse_args()
     if not(par.languaje) or not(par.traduce):
         print(f"{Fore.RED} No se ha podido traducir \n {Fore.BLUE}[{Fore.YELLOW}*{Fore.BLUE}]      faltan argumentos")
