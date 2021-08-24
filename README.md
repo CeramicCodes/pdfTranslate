@@ -25,7 +25,7 @@ python pdfTranslate.py -l en -t es -noC -o salida.pdf archivo_a_traducir.pdf
 
 ```
 
-###opciones:
+```===================================opciones==============================```
 
 ```bash
 
