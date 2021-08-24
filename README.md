@@ -34,7 +34,7 @@ python pdfTranslate.py -l en -t es -noC -o salida.pdf archivo_a_traducir.pdf
 -c convertir a pdf [no requiere que pases un argumento es una bandera]
 -noC no convertir a pdf [no requiere que pases un argumento es una bandera]
 -o el nombre del archivo de salida [requiere que pases como argumento el nombre del archivo nuevo]
--um use multiprocess (usar multiprocesamiento) (consultar comandos en face de desarollo) [no requiere que pases un argumento es una bandera]
+-um use multiprocess (usar multiprocesamiento) (consultar comandos en face de desarollo) [no requiere que pases un argumento es una bandera] [actual mente se ha quitado]
 -h help o ayuda [no requiere que pases un argumento es una bandera]
 --help [no requiere que pases un argumento es una bandera]
 path la ruta del documento a traducir [requiere como argumento una ruta del archivo a traducir]
