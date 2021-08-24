@@ -43,7 +43,7 @@ path la ruta del documento a traducir [requiere como argumento una ruta del arch
 ```
 
 
-### comandos en face de desarollo:
+### comandos en fase de desarollo:
 
 ```bash
 
