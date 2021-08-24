@@ -20,7 +20,7 @@ python pdfTranslate.py -l en -t es -c -o salida.pdf archivo_a_traducir.pdf
 
 # si solo queremos traducir y convertir el pdf a word
 
-python pdfTranslate.py -l en -t es  -o salida.pdf archivo_a_traducir.pdf
+python pdfTranslate.py -l en -t es -noc -o salida.pdf archivo_a_traducir.pdf
 
 ```
 
