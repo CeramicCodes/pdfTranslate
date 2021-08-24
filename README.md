@@ -36,5 +36,5 @@ por ser bots.
 solo use esta opcion si tiene una pc algo buena.
 ```
 
-[si se tiene algun inconveniente con el script por favor mandenos una captura de el en un ticket](https://discord.gg/Y8G4GY4xTu)
+[si se tiene algun inconveniente con el script por favor mandenos una captura de el en un ticket en nuestra comunidad de dsicord](https://discord.gg/Y8G4GY4xTu)
 
