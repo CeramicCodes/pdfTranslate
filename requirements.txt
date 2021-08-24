@@ -1,0 +1,7 @@
+PyPDF2
+tqdm
+colorama
+requests
+pdf2docx
+docx2pdf
+argparse
